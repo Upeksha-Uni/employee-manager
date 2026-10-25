@@ -72,6 +72,7 @@
         .error {
             color: #b42318;
             font-size: 0.9em;
+            margin-top: 5px;
         }
 
         .table-wrap {
@@ -117,39 +118,43 @@
 
     <form th:action="@{/employees}"
           th:object="${employee}"
-          method="post">
+          method="post"
+          novalidate>
 
         <div class="form-grid">
             <div>
                 <label for="fullName">Full Name</label>
                 <input id="fullName" type="text"
-                       th:field="*{fullName}" required>
+                       th:field="*{fullName}">
                 <div class="error"
+                     th:if="${#fields.hasErrors('fullName')}"
                      th:errors="*{fullName}"></div>
             </div>
 
             <div>
                 <label for="email">Email</label>
-                <input id="email" type="email"
-                       th:field="*{email}" required>
+                <input id="email" type="text"
+                       th:field="*{email}">
                 <div class="error"
+                     th:if="${#fields.hasErrors('email')}"
                      th:errors="*{email}"></div>
             </div>
 
             <div>
                 <label for="phone">Phone (10 digits)</label>
-                <input id="phone" type="tel"
-                       th:field="*{phone}"
-                       pattern="[0-9]{10}" required>
+                <input id="phone" type="text"
+                       th:field="*{phone}">
                 <div class="error"
+                     th:if="${#fields.hasErrors('phone')}"
                      th:errors="*{phone}"></div>
             </div>
 
             <div>
                 <label for="department">Department</label>
                 <input id="department" type="text"
-                       th:field="*{department}" required>
+                       th:field="*{department}">
                 <div class="error"
+                     th:if="${#fields.hasErrors('department')}"
                      th:errors="*{department}"></div>
             </div>
 
@@ -157,8 +162,9 @@
                 <label for="salary">Salary</label>
                 <input id="salary" type="number"
                        th:field="*{salary}"
-                       min="0.01" step="0.01" required>
+                       step="any">
                 <div class="error"
+                     th:if="${#fields.hasErrors('salary')}"
                      th:errors="*{salary}"></div>
             </div>
         </div>
