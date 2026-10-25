@@ -3,7 +3,6 @@ package com.example.employeemanager.service;
 
 import com.example.employeemanager.model.Employee;
 import com.example.employeemanager.repository.EmployeeRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +27,11 @@ public class EmployeeService {
 
     public boolean emailExists(String email) {
         return employeeRepository.existsByEmail(email);
+    }
+
+    public boolean emailExistsForOtherEmployee(
+            String email, Long id) {
+        return employeeRepository.existsByEmailAndIdNot(email, id);
     }
 
     public Employee saveEmployee(Employee employee) {
